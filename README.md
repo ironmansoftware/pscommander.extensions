@@ -33,3 +33,15 @@ Install-Module PSCommander.Extensions
 ```
 
 For issues related to PSCommander itself, file them on our [central product repository](https://github.com/ironmansoftware/issues).
+
+# Widgets
+
+## Simple Performance Information 
+
+Display a simple performance desktop widget.
+
+```powershell
+New-CommanderSimplePerformanceInfo
+```
+
+![](./images/SimplePerformance.png)
