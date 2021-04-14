@@ -51,5 +51,5 @@ function New-CommanderSimplePerformanceInfo
         [xml]$Form = Get-Content ("$PSScriptRoot\XAML\SimplePerformanceInfo.xaml") -Raw
             $XMLReader = (New-Object System.Xml.XmlNodeReader $Form)
             [Windows.Markup.XamlReader]::Load($XMLReader)
-    } -Height 200 -Width 1400 -Top 20 -Left 100 -DataSource 'ComputerInfo'
+    } -Height $Height -Width $Width -Top $Top -Left $Left -DataSource 'ComputerInfo'
 }
