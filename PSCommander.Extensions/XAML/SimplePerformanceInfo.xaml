@@ -1,0 +1,35 @@
+<Window 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    WindowStyle="None"
+    ResizeMode="NoResize"
+    Background="Transparent"
+    Height="200"
+    Width="1900"
+>
+    <Grid Margin="10">
+        <Border BorderBrush="#333333" BorderThickness="1" Background="#333333" Grid.Column="1"
+                CornerRadius="10" VerticalAlignment="Center"
+                HorizontalAlignment="Stretch">
+            <Grid Margin="10">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="250"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding CPU, StringFormat=CPU: {0}%}" TextWrapping="Wrap" Margin="5" Foreground="#28bf37" FontFamily="Consolas" Grid.Column="0"/>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding Memory, StringFormat=Available Memory: {0:N0} MB}" TextWrapping="Wrap" Margin="5" Foreground="#28bf37" FontFamily="Consolas" Grid.Column="1"/>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding NetworkUp, StringFormat=Network Up: {0:N0} KB\s}" TextWrapping="Wrap" Margin="5" Foreground="#28bf37" FontFamily="Consolas" Grid.Column="2"/>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding NetworkDown, StringFormat=Network Down: {0:N0} KB\s}" TextWrapping="Wrap" Margin="5" Foreground="#28bf37" FontFamily="Consolas" Grid.Column="3"/>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding Space, StringFormat=Available Space (C:): {0:N0} GB}" TextWrapping="Wrap" Margin="5" Foreground="#28bf37" FontFamily="Consolas" Grid.Column="4"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
