@@ -12,7 +12,7 @@
 RootModule = 'PSCommander.Extensions.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.2'
+ModuleVersion = '0.0.3'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -24,7 +24,7 @@ GUID = 'd702fc97-0aca-4f8a-b23b-d5f4e6efd4cf'
 Author = 'Ironman Software'
 
 # Company or vendor of this module
-CompanyName = 'Unknown'
+CompanyName = 'Ironman Software'
 
 # Copyright statement for this module
 Copyright = 'Ironman Software 2021'
@@ -69,7 +69,7 @@ Description = 'Extensions for PSCommander'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @('New-CommanderSimplePerformanceInfo')
+FunctionsToExport = @('New-CommanderSimplePerformanceInfo', 'New-CommanderDriveSpaceChart')
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 #CmdletsToExport = '*'

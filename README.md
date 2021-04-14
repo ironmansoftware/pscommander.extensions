@@ -36,6 +36,16 @@ For issues related to PSCommander itself, file them on our [central product repo
 
 # Widgets
 
+## Drive Space 
+
+Display a drive space widget as a gauge. 
+
+```powershell
+New-CommanderDriveSpaceChart -DriveLetter C
+```
+
+![](./images/DriveSpace.png)
+
 ## Simple Performance Information 
 
 Display a simple performance desktop widget.

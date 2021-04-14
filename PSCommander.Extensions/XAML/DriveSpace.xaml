@@ -1,0 +1,31 @@
+<Window 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    WindowStyle="None"
+    ResizeMode="NoResize"
+    Background="Transparent"
+    Height="400"
+    Width="400"
+>
+    <Grid Margin="10">
+        <Border BorderBrush="#333333" BorderThickness="1" Background="#333333"
+                CornerRadius="10" VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch">
+            <Grid Margin="10">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding Drive}" Foreground="#28bf37" FontFamily="Consolas" FontSize="30" HorizontalAlignment="Center"/>
+                <lvc:Gauge DataContext="{Binding CurrentValue}" Margin="5" From="0" To="{Binding Total}" Value="{Binding Used}" FromColor="#28bf37" ToColor="#28bf37" Foreground="#28bf37">
+                    <lvc:Gauge.GaugeActiveFill>
+                        <SolidColorBrush  Color="#28bf37"/>
+                    </lvc:Gauge.GaugeActiveFill>
+                </lvc:Gauge>
+
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
