@@ -101,7 +101,7 @@ PrivateData = @{
         # LicenseUri = ''
 
         # A URL to the main website for this project.
-        ProjectUri = 'https://github.com/ironmansoftware/pscommander'
+        ProjectUri = 'https://github.com/ironmansoftware/pscommander.extensions'
 
         # A URL to an icon representing this module.
         IconUri = 'https://github.com/ironmansoftware/assets/raw/main/pscommander.png'
