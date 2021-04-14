@@ -1,5 +1,7 @@
 # PSCommander Extensions
 
+![](https://github.com/ironmansoftware/assets/raw/main/pscommander.png)
+
 Command your desktop with PowerShell
 
 # Install PSCommander
