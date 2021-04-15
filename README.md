@@ -36,6 +36,8 @@ For issues related to PSCommander itself, file them on our [central product repo
 
 # Widgets
 
+Display widgets on your desktop. They will update automatically and will be positioned on top of your wallpaper but under your icons. 
+
 ## Computer Info
 
 Displays computer info
