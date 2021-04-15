@@ -142,12 +142,27 @@ function New-CommanderTimeAndDate
         [Parameter()]
         [int]$Top = 50,
         [Parameter()]
-        [int]$Left = 50
+        [int]$Left = 50,
+        [Parameter()]
+        [System.TimeZoneInfo]$TimeZone
     )
 
     Register-CommanderDataSource -Name "Time" -LoadData {
-        Get-Date
-    } -RefreshInterval 60
+        if ($args[0] -ne $null)
+        {
+            $Date = [TimeZoneInfo]::ConvertTime((Get-Date), $args[0])
+            @{
+                TimeZone = $args[0].Id
+                Date = $Date
+            }
+        }
+        else 
+        {
+            @{
+                Date = Get-Date 
+            }
+        }
+    } -RefreshInterval 60 -ArgumentList @($TimeZone)
 
     New-CommanderDesktopWidget -LoadWidget {
         [xml]$Form = Get-Content ("$PSScriptRoot\XAML\Clock.xaml") -Raw
@@ -179,7 +194,7 @@ function New-CommanderComputerInfo
     
     .EXAMPLE
     New-CommanderComputerInfo
-    
+
     #>
     param(
         [Parameter()]

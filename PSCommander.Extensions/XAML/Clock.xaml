@@ -12,10 +12,12 @@
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock Text="{Binding CurrentValue, StringFormat=\{0:D\}}" TextWrapping="Wrap" Margin="5" FontSize="15" Foreground="#28bf37" FontFamily="Consolas"/>
-                <TextBlock Text="{Binding CurrentValue, StringFormat=\{0:t\}}" TextWrapping="Wrap" Margin="5" FontSize="25" Foreground="#28bf37" FontFamily="Consolas" Grid.Row="2"/>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding Date, StringFormat=\{0:D\}}" TextWrapping="Wrap" Margin="5" FontSize="15" Foreground="#28bf37" FontFamily="Consolas"/>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding Date, StringFormat=\{0:t\}}" TextWrapping="Wrap" Margin="5" FontSize="25" Foreground="#28bf37" FontFamily="Consolas" Grid.Row="2"/>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding TimeZone}" TextWrapping="Wrap" Margin="5" FontSize="15" Foreground="#28bf37" FontFamily="Consolas"  Grid.Row="3"/>
             </Grid>
         </Border>
     </Grid>
