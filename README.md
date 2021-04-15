@@ -36,12 +36,22 @@ For issues related to PSCommander itself, file them on our [central product repo
 
 # Widgets
 
+## Computer Info
+
+Displays computer info
+
+```powershell
+New-CommanderComputerInfo
+```
+
+![](./images/ComputerInfo.png)
+
 ## Drive Space 
 
 Display a drive space widget as a gauge. 
 
 ```powershell
-New-CommanderDriveSpaceChart -DriveLetter C
+New-CommanderDriveSpaceGauge -DriveLetter C
 ```
 
 ![](./images/DriveSpace.png)
@@ -55,3 +65,13 @@ New-CommanderSimplePerformanceInfo
 ```
 
 ![](./images/SimplePerformance.png)
+
+## Time and Date 
+
+Displays time and date. 
+
+```powershell
+New-CommanderTimeAndDate
+```
+
+![](./images/TimeAndDate.png)

@@ -54,8 +54,33 @@ function New-CommanderSimplePerformanceInfo
     } -Height $Height -Width $Width -Top $Top -Left $Left -DataSource 'ComputerInfo'
 }
 
-function New-CommanderDriveSpaceChart
+function New-CommanderDriveSpaceGauge
 {
+    <#
+    .SYNOPSIS
+    Creates a simple gauge to display drive space.
+    
+    .DESCRIPTION
+    Creates a simple gauge to display drive space.
+    
+    .PARAMETER DriveLetter
+    The drive letter to display the space for.
+    
+    .PARAMETER Height
+    Widget height
+    
+    .PARAMETER Width
+    Widget width
+    
+    .PARAMETER Top
+    Widget top offset
+    
+    .PARAMETER Left
+    Widget left offset. 
+    
+    .EXAMPLE
+    New-CommanderDriveSpaceGauage -DriveLetter C
+    #>
     param(
         [Parameter(Mandatory)]
         [char]$DriveLetter,
@@ -83,4 +108,97 @@ function New-CommanderDriveSpaceChart
             $XMLReader = (New-Object System.Xml.XmlNodeReader $Form)
             [Windows.Markup.XamlReader]::Load($XMLReader)
     } -Height $Height -Width $Width -Top $Top -Left $Left -DataSource "DriveSpace_$DriveLetter"
+}
+
+function New-CommanderTimeAndDate 
+{
+    <#
+    .SYNOPSIS
+    Displays the date and time
+    
+    .DESCRIPTION
+    Displays the date and time
+    
+    .PARAMETER Height
+    Widget height
+    
+    .PARAMETER Width
+    Widget width
+    
+    .PARAMETER Top
+    Widget top offset
+    
+    .PARAMETER Left
+    Widget left offset. 
+    
+    .EXAMPLE
+    New-CommanderTimeAndDate
+    #>
+    param(
+        [Parameter()]
+        [int]$Height = 200,
+        [Parameter()]
+        [int]$Width = 300,
+        [Parameter()]
+        [int]$Top = 50,
+        [Parameter()]
+        [int]$Left = 50
+    )
+
+    Register-CommanderDataSource -Name "Time" -LoadData {
+        Get-Date
+    } -RefreshInterval 60
+
+    New-CommanderDesktopWidget -LoadWidget {
+        [xml]$Form = Get-Content ("$PSScriptRoot\XAML\Clock.xaml") -Raw
+            $XMLReader = (New-Object System.Xml.XmlNodeReader $Form)
+            [Windows.Markup.XamlReader]::Load($XMLReader)
+    } -Height $Height -Width $Width -Top $Top -Left $Left -DataSource "Time"
+}
+
+function New-CommanderComputerInfo 
+{
+    <#
+    .SYNOPSIS
+    Displays computer information.
+    
+    .DESCRIPTION
+    Displays computer information.
+    
+    .PARAMETER Height
+    Widget height
+    
+    .PARAMETER Width
+    Widget width
+    
+    .PARAMETER Top
+    Widget top offset
+    
+    .PARAMETER Left
+    Widget left offset. 
+    
+    .EXAMPLE
+    New-CommanderComputerInfo
+    
+    #>
+    param(
+        [Parameter()]
+        [int]$Height = 600,
+        [Parameter()]
+        [int]$Width = 400,
+        [Parameter()]
+        [int]$Top = 50,
+        [Parameter()]
+        [int]$Left = 50
+    )
+
+    Register-CommanderDataSource -Name "ComputerInfo" -LoadData {
+        Get-ComputerInfo
+    } -RefreshInterval 60
+
+    New-CommanderDesktopWidget -LoadWidget {
+        [xml]$Form = Get-Content ("$PSScriptRoot\XAML\ComputerInfo.xaml") -Raw
+            $XMLReader = (New-Object System.Xml.XmlNodeReader $Form)
+            [Windows.Markup.XamlReader]::Load($XMLReader)
+    } -Height $Height -Width $Width -Top $Top -Left $Left -DataSource "ComputerInfo"
 }

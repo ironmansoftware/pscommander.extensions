@@ -1,0 +1,48 @@
+<Window 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    WindowStyle="None"
+    ResizeMode="NoResize"
+    Background="Transparent"
+>
+    <Grid Margin="10">
+        <Border BorderBrush="#333333" BorderThickness="1" Background="#333333" Grid.Column="1"
+                CornerRadius="10" VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding CsName}" TextWrapping="Wrap" Margin="5" FontSize="25" Foreground="#28bf37" FontFamily="Consolas"/>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding WindowsProductName, StringFormat=Operating System: {0}}" TextWrapping="Wrap" Margin="5" FontSize="15" Foreground="#28bf37" FontFamily="Consolas" Grid.Row="2"/>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding CsSystemFamily, StringFormat=System Family: {0}}" TextWrapping="Wrap" Margin="5" FontSize="15" Foreground="#28bf37" FontFamily="Consolas" Grid.Row="3"/>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding OsLastBootUpTime, StringFormat=Boot Time: {0}}" TextWrapping="Wrap" Margin="5" FontSize="15" Foreground="#28bf37" FontFamily="Consolas" Grid.Row="4"/>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding CsDomain, StringFormat=Domain: {0}}" TextWrapping="Wrap" Margin="5" FontSize="15" Foreground="#28bf37" FontFamily="Consolas" Grid.Row="5"/>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="Processors" TextWrapping="Wrap" Margin="5" FontSize="20" Foreground="#28bf37" FontFamily="Consolas" Grid.Row="6"/>
+                <ItemsControl  DataContext="{Binding CurrentValue}" ItemsSource="{Binding CsProcessors}" Grid.Row="7">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Margin="5" FontSize="15" Foreground="#28bf37" FontFamily="Consolas"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="Networks" TextWrapping="Wrap" Margin="5" FontSize="20" Foreground="#28bf37" FontFamily="Consolas" Grid.Row="8"/>
+                <ItemsControl  DataContext="{Binding CurrentValue}" ItemsSource="{Binding CsNetworkAdapters}" Grid.Row="9">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="5" FontSize="15" Foreground="#28bf37" FontFamily="Consolas"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
