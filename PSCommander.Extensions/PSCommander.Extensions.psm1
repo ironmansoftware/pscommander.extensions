@@ -217,3 +217,120 @@ function New-CommanderComputerInfo
             [Windows.Markup.XamlReader]::Load($XMLReader)
     } -Height $Height -Width $Width -Top $Top -Left $Left -DataSource "ComputerInfo"
 }
+
+
+function New-CommanderTicker 
+{
+    <#
+    .SYNOPSIS
+    Displays a stock or crypto ticker
+    
+    .DESCRIPTION
+    Displays a stock or crypto ticker
+    
+    .PARAMETER Height
+    Widget height
+    
+    .PARAMETER Width
+    Widget width
+    
+    .PARAMETER Top
+    Widget top offset
+    
+    .PARAMETER Left
+    Widget left offset. 
+
+    .PARAMETER StockSymbol
+    Stock symbol
+
+    .PARAMETER CryptoSymbol
+    Crypto symbol
+    
+    .EXAMPLE
+    New-CommanderTicker -StockSymbol MSFT -ApiKey ''
+
+    #>
+    param(
+        [Parameter()]
+        [int]$Height = 600,
+        [Parameter()]
+        [int]$Width = 400,
+        [Parameter()]
+        [int]$Top = 50,
+        [Parameter()]
+        [int]$Left = 50,
+        [Parameter(Mandatory, ParameterSetName = "Stock")]
+        [string]$StockSymbol,
+        [Parameter(Mandatory, ParameterSetName = "Crypto")]
+        [string]$CryptoSymbol,
+        [Parameter(ParameterSetName = "Crypto")]
+        [string]$CryptoTarget = 'USD',
+        [Parameter(Mandatory)]
+        [string]$ApiKey
+    )
+
+    $Symbol = $CryptoSymbol 
+    if ($StockSymbol)
+    {
+        $Symbol = $StockSymbol
+    }
+
+    Register-CommanderDataSource -Name "Stock_$Symbol" -LoadData {
+
+        $Symbol = $Args[0]
+        $ApiKey = $Args[1]
+        $Type = $Args[2]
+        $CryptoTarget = $Args[3]
+
+        $Date = Get-Date
+        if ($Date.DayOfWeek -eq [DayOfWeek]::Monday)
+        {
+            $Date = $Date.AddDays(-2)
+        }
+
+        if ($Date.DayOfWeek -eq [DayOfWeek]::Saturday)
+        {
+            $Date = $Date.AddDays(-1)
+        }
+
+        $StrDate = $Date.ToString("yyyy-MM-dd")
+
+        if ($Type -eq 'Crypto')
+        {
+            $Uri = "v1/open-close/crypto/$Symbol/USD/$($StrDate)?apiKey=$ApiKey"
+        }
+        else 
+        {
+            $Uri = "v1/open-close/$Symbol/$($StrDate)?unadjusted=true&apiKey=$ApiKey"
+        }
+    
+        $Result = Invoke-RestMethod "https://api.polygon.io/$Uri" -ErrorAction SilentlyContinue
+
+        if ($Result.Close -lt $Result.Open)
+        {
+            $ForegroundColor = "#c63629"
+        }
+        else 
+        {
+            $ForegroundColor = "#28bf37"
+        }
+
+        if ($Type -eq 'Crypto')
+        {
+            $Symbol = "$Symbol-$CryptoTarget"
+        }
+
+        @{
+            Symbol = $Symbol
+            Close = $Result.Close
+            Open = $Result.Open
+            ForegroundColor = $ForegroundColor
+        }
+    } -RefreshInterval 86400 -ArgumentList @($Symbol, $ApiKey, $PSCmdlet.ParameterSetName, $CryptoTarget)
+
+    New-CommanderDesktopWidget -LoadWidget {
+        [xml]$Form = Get-Content ("$PSScriptRoot\XAML\Ticker.xaml") -Raw
+        $XMLReader = (New-Object System.Xml.XmlNodeReader $Form)
+        [Windows.Markup.XamlReader]::Load($XMLReader)
+    } -Height $Height -Width $Width -Top $Top -Left $Left -DataSource "Stock_$Symbol"
+}

@@ -1,0 +1,25 @@
+<Window 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    WindowStyle="None"
+    ResizeMode="NoResize"
+    Background="Transparent"
+>
+    <Grid Margin="10">
+        <Border BorderBrush="#333333" BorderThickness="1" Background="#333333" Grid.Column="1"
+                CornerRadius="10" VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding Symbol}" TextWrapping="Wrap" Margin="5" FontSize="15" Foreground="{Binding ForegroundColor}" FontFamily="Consolas"/>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding Close}" TextWrapping="Wrap" Margin="5" FontSize="25" Foreground="{Binding ForegroundColor}" FontFamily="Consolas" Grid.Row="2"/>
+                <TextBlock DataContext="{Binding CurrentValue}" Text="{Binding Open}" TextWrapping="Wrap" Margin="5" FontSize="15" Foreground="{Binding ForegroundColor}" FontFamily="Consolas" Grid.Row="3"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

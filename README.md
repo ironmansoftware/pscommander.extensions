@@ -68,6 +68,17 @@ New-CommanderSimplePerformanceInfo
 
 ![](./images/SimplePerformance.png)
 
+## Ticker
+
+Stock and crypto ticker. Requires a [polygon.io](https://polygon.io/) API key (free). 
+
+```powershell
+New-CommanderTicker -StockSymbol AAPL -ApiKey 'xyz' -Left 500 
+New-CommanderTicker -CryptoSymbol BTC -ApiKey 'xyz' -Left 750
+```
+
+![](./images/ticker.png)
+
 ## Time and Date 
 
 Displays time and date. 
